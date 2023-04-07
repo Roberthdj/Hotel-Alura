@@ -35,6 +35,7 @@ public class RegistroHuesped extends JFrame {
     private JLabel labelExit;
     private JLabel labelAtras;
     int xMouse, yMouse;
+    private int idReserva;
 
     /**
      * Launch the application.
@@ -50,6 +51,7 @@ public class RegistroHuesped extends JFrame {
                 }
             }
         });
+
     }
 
     /**
@@ -225,11 +227,13 @@ public class RegistroHuesped extends JFrame {
         contentPane.add(lblNumeroReserva);
 
         txtNreserva = new JTextField();
-        txtNreserva.setFont(new Font("Roboto", Font.PLAIN, 16));
+        txtNreserva.setFont(new Font("Roboto", Font.PLAIN, 20));
         txtNreserva.setBounds(560, 495, 285, 33);
         txtNreserva.setColumns(10);
         txtNreserva.setBackground(Color.WHITE);
         txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        txtNreserva.setEditable(false);
+        txtNreserva.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(txtNreserva);
 
         JSeparator separator_1_2 = new JSeparator();
@@ -350,6 +354,11 @@ public class RegistroHuesped extends JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
+    }
+
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
+        txtNreserva.setText(String.valueOf(idReserva));
     }
 
 }

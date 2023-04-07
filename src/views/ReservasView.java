@@ -26,6 +26,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.util.Date;
 import utilidades.Utilidades;
+import modelos.Reserva;
+import controller.ReservaController;
 
 @SuppressWarnings("serial")
 public class ReservasView extends JFrame {
@@ -39,6 +41,7 @@ public class ReservasView extends JFrame {
     private JLabel labelExit;
     private JLabel labelAtras;
     private double valorReserva;
+    private ReservaController reservaController;
 
     /**
      * Launch the application.
@@ -61,6 +64,9 @@ public class ReservasView extends JFrame {
      */
     public ReservasView() {
         super("Reserva");
+
+        this.reservaController = new ReservaController();
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(ReservasView.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 910, 560);
@@ -339,8 +345,7 @@ public class ReservasView extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {
-                    RegistroHuesped registro = new RegistroHuesped();
-                    registro.setVisible(true);
+                    siguiente();
                 } else {
                     JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
                 }
@@ -373,5 +378,28 @@ public class ReservasView extends JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
+    }
+    
+    private void siguiente() {
+
+        if (ReservasView.txtFechaEntrada.getDate().before(ReservasView.txtFechaSalida.getDate())
+                && ReservasView.txtFechaSalida.getDate().after(ReservasView.txtFechaEntrada.getDate())
+                && valorReserva != 0) {
+
+            var reserva = new Reserva();
+
+            reserva.setFechaEntrada(txtFechaEntrada.getDate());
+            reserva.setFechaSalida(txtFechaSalida.getDate());
+            reserva.setValor(valorReserva);
+            reserva.setTipoHabitacion(txtTipoHabitacion.getSelectedItem().toString());
+            reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
+
+            this.reservaController.guardar(reserva);            
+
+        } else {
+            JOptionPane.showMessageDialog(null, "La fecha de CHECK-IN debe igual o mayor a la fecha actual,"
+                    + "\nla fecha de CHECK-OUT debe se mayor a la de CHECK-IN.");
+        }
+
     }
 }
