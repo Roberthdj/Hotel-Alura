@@ -78,7 +78,7 @@ public class Login extends JFrame {
         imgHotel.setIcon(new ImageIcon(Login.class.getResource("/imagenes/img-hotel-login-.png")));
 
         JPanel btnexit = new JPanel();
-        btnexit.setBounds(251, 0, 53, 36);
+        btnexit.setBounds(227, 0, 100, 36);
         panel_1.add(btnexit);
         btnexit.addMouseListener(new MouseAdapter() {
             @Override
@@ -102,8 +102,8 @@ public class Login extends JFrame {
         btnexit.setLayout(null);
         btnexit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        labelExit = new JLabel("X");
-        labelExit.setBounds(0, 0, 53, 36);
+        labelExit = new JLabel("Salir >>");
+        labelExit.setBounds(0, 0, 80, 36);
         btnexit.add(labelExit);
         labelExit.setForeground(SystemColor.text);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));

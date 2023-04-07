@@ -197,12 +197,12 @@ public class ReservasView extends JFrame {
         });
         btnexit.setLayout(null);
         btnexit.setBackground(new Color(12, 138, 199));
-        btnexit.setBounds(429, 0, 53, 36);
+        btnexit.setBounds(410, 0, 100, 36);
         panel_1.add(btnexit);
 
-        labelExit = new JLabel("X");
+        labelExit = new JLabel("Salir >>");
         labelExit.setForeground(Color.WHITE);
-        labelExit.setBounds(0, 0, 53, 36);
+        labelExit.setBounds(-5, 0, 80, 36);
         btnexit.add(labelExit);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
@@ -213,7 +213,6 @@ public class ReservasView extends JFrame {
             @Override
             public void mouseDragged(MouseEvent e) {
                 headerMouseDragged(e);
-
             }
         });
         header.addMouseListener(new MouseAdapter() {
@@ -252,11 +251,11 @@ public class ReservasView extends JFrame {
         btnAtras.setBounds(0, 0, 75, 35);
         header.add(btnAtras);
 
-        labelAtras = new JLabel("Atrás");
+        labelAtras = new JLabel("<< Atrás");
         labelAtras.setBounds(0, 0, 75, 35);
         btnAtras.add(labelAtras);
         labelAtras.setHorizontalAlignment(SwingConstants.CENTER);
-        labelAtras.setFont(new Font("Roboto", Font.PLAIN, 20));
+        labelAtras.setFont(new Font("Roboto", Font.PLAIN, 18));
 
         JLabel lblSiguiente = new JLabel("SIGUIENTE");
         lblSiguiente.setHorizontalAlignment(SwingConstants.CENTER);

@@ -43,6 +43,7 @@ public class MenuPrincipal extends JFrame {
      * Create the frame.
      */
     public MenuPrincipal() {
+        
         setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 910, 537);
@@ -76,10 +77,11 @@ public class MenuPrincipal extends JFrame {
         panel.add(panel_1);
         panel_1.setLayout(null);
 
-        JLabel lblCopyR = new JLabel("Desarrollado por Fulanita de Tal © 2023");
-        lblCopyR.setBounds(315, 11, 284, 19);
+        JLabel lblCopyR = new JLabel("Funcionalidades desarrolladas por 'Roberth Rodriguez C.' © 2023");
+        lblCopyR.setBounds(200, 11, 500, 19);
         lblCopyR.setForeground(new Color(240, 248, 255));
         lblCopyR.setFont(new Font("Roboto", Font.PLAIN, 16));
+        lblCopyR.setHorizontalAlignment(SwingConstants.CENTER);
         panel_1.add(lblCopyR);
 
         //Barra para controlar la ventana 
@@ -125,11 +127,11 @@ public class MenuPrincipal extends JFrame {
         btnexit.setLayout(null);
         btnexit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(857, 0, 53, 36);
+        btnexit.setBounds(820, 0, 100, 36);
         header.add(btnexit);
 
-        labelExit = new JLabel("X");
-        labelExit.setBounds(0, 0, 53, 36);
+        labelExit = new JLabel("Salir >>");
+        labelExit.setBounds(0, 0, 80, 36);
         btnexit.add(labelExit);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));

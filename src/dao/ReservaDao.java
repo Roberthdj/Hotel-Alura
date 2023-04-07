@@ -21,8 +21,8 @@ public class ReservaDao {
     public int guardar(Reserva reserva) {
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-        String Entrada = date.format(reserva.getFechaEntrada());
-        String Salida = date.format(reserva.getFechaSalida());
+        String entrada = date.format(reserva.getFechaEntrada());
+        String salida = date.format(reserva.getFechaSalida());
 
         try {
 
@@ -33,8 +33,8 @@ public class ReservaDao {
                     + " VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             try (statement) {
-                statement.setDate(1, Date.valueOf(Entrada));
-                statement.setDate(2, Date.valueOf(Salida));
+                statement.setDate(1, Date.valueOf(entrada));
+                statement.setDate(2, Date.valueOf(salida));
                 statement.setDouble(3, reserva.getValor());
                 statement.setString(4, reserva.getTipoHabitacion());
                 statement.setString(5, reserva.getFormaPago());

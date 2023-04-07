@@ -20,11 +20,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.ActionListener;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.SystemColor;
-import javax.swing.JButton;
+
 
 @SuppressWarnings("serial")
 public class Busqueda extends JFrame {
@@ -59,6 +55,7 @@ public class Busqueda extends JFrame {
      * Create the frame.
      */
     public Busqueda() {
+        
         setIconImage(Toolkit.getDefaultToolkit().getImage(Busqueda.class.getResource("/imagenes/lupa2.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 910, 571);
@@ -163,13 +160,13 @@ public class Busqueda extends JFrame {
         });
         btnAtras.setLayout(null);
         btnAtras.setBackground(Color.WHITE);
-        btnAtras.setBounds(0, 0, 53, 36);
+        btnAtras.setBounds(0, 0, 100, 36);
         header.add(btnAtras);
 
-        labelAtras = new JLabel(" <<");
+        labelAtras = new JLabel("<< Atrás");
         labelAtras.setHorizontalAlignment(SwingConstants.CENTER);
-        labelAtras.setFont(new Font("Roboto", Font.PLAIN, 23));
-        labelAtras.setBounds(0, 0, 53, 36);
+        labelAtras.setFont(new Font("Roboto", Font.PLAIN, 18));
+        labelAtras.setBounds(0, 0, 80, 36);
         btnAtras.add(labelAtras);
 
         JPanel btnexit = new JPanel();
@@ -195,14 +192,14 @@ public class Busqueda extends JFrame {
         });
         btnexit.setLayout(null);
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(857, 0, 53, 36);
+        btnexit.setBounds(830, 0, 100, 36);
         header.add(btnexit);
 
-        labelExit = new JLabel("X");
+        labelExit = new JLabel("Salir >>");
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setForeground(Color.BLACK);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
-        labelExit.setBounds(0, 0, 53, 36);
+        labelExit.setBounds(0, 0, 80, 36);
         btnexit.add(labelExit);
 
         JSeparator separator_1_2 = new JSeparator();

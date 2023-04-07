@@ -17,9 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.SystemColor;
 import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import java.awt.event.ActionEvent;
+
 
 @SuppressWarnings("serial")
 public class MenuUsuario extends JFrame {
@@ -180,11 +178,11 @@ public class MenuUsuario extends JFrame {
 
         btnexit.setLayout(null);
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(891, 0, 53, 36);
+        btnexit.setBounds(870, 0, 100, 36); 
         header.add(btnexit);
 
-        labelExit = new JLabel("X");
-        labelExit.setBounds(0, 0, 53, 36);
+        labelExit = new JLabel("Salir >>");
+        labelExit.setBounds(-5, 0, 80, 36);
         btnexit.add(labelExit);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
