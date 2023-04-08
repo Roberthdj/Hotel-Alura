@@ -387,6 +387,11 @@ public class RegistroHuesped extends JFrame {
 
             this.huespedController.guardar(huesped);
 
+            JOptionPane.showMessageDialog(null, "El registro se ha guardado exitosamente!");
+            MenuUsuario usuario = new MenuUsuario();
+            usuario.setVisible(true);
+            dispose();
+
         } else {
             JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
         }

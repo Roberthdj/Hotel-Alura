@@ -342,17 +342,6 @@ public class ReservasView extends JFrame {
         panel.add(txtFormaPago);
 
         JPanel btnsiguiente = new JPanel();
-        btnsiguiente.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {
-                    siguiente();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
-                }
-            }
-        });
-
         JLabel labelSiguiente = new JLabel("SIGUIENTE");
         labelSiguiente.setHorizontalAlignment(SwingConstants.CENTER);
         labelSiguiente.setForeground(Color.WHITE);
@@ -363,9 +352,19 @@ public class ReservasView extends JFrame {
         btnsiguiente.setBackground(SystemColor.textHighlight);
         btnsiguiente.setBounds(250, 493, 150, 35);
         btnsiguiente.add(labelSiguiente);
-
         btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panel.add(btnsiguiente);
+
+        btnsiguiente.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {
+                    siguiente();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+                }
+            }
+        });
 
     }
 
@@ -396,10 +395,13 @@ public class ReservasView extends JFrame {
             reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
 
             this.reservaController.guardar(reserva);
+            JOptionPane.showMessageDialog(null, "Se ha creado una nueva reserva, porfavor \n"
+                    + "llene los datos del huesped!");
+            dispose();
 
         } else {
-            JOptionPane.showMessageDialog(null, "La fecha de CHECK-IN debe igual o mayor a la fecha actual,"
-                    + "\nla fecha de CHECK-OUT debe se mayor a la de CHECK-IN.");
+            JOptionPane.showMessageDialog(null, "La fecha de CHECK-IN debe igual o mayor a la fecha actual,\n"
+                    + "la fecha de CHECK-OUT debe se mayor a la de CHECK-IN.");
         }
 
     }

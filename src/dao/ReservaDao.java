@@ -95,14 +95,50 @@ public class ReservaDao {
 
     }
 
-    public int eliminar(int idReserva) {
+    public int modificar(int idReserva, Date fechaEntrada, Date fechaSalida, double valor, String tipoHabitacion, String formaPago) {
 
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        String entrada = date.format(fechaEntrada);
+        String salida = date.format(fechaSalida);
+
+        try {
+            final PreparedStatement statement = conn.prepareStatement(
+                    "UPDATE reservas SET "
+                    + " fechaEntrada = ?, "
+                    + " fechaSalida = ?,"
+                    + " valor = ?,"
+                    + " tipoHabitacion = ?,"
+                    + " formaPago = ?"
+                    + " WHERE id = ?"
+            );
+
+            try (statement) {
+
+                statement.setDate(1, Date.valueOf(entrada));
+                statement.setDate(2, Date.valueOf(salida));
+                statement.setDouble(3, valor);
+                statement.setString(4, tipoHabitacion);
+                statement.setString(5, formaPago);
+                statement.setInt(6, idReserva);
+
+                statement.execute();
+
+                int updateCount = statement.getUpdateCount();
+
+                return updateCount;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int eliminar(Integer idReserva) {
         try {
 
             PreparedStatement statement = conn.prepareStatement("DELETE FROM reservas WHERE id = ?");
 
             try (statement) {
-                statement.setInt(0, idReserva);
+                statement.setInt(1, idReserva);
                 statement.execute();
 
                 int updateCount = statement.getUpdateCount();
@@ -114,4 +150,5 @@ public class ReservaDao {
             throw new RuntimeException(e);
         }
     }
+
 }

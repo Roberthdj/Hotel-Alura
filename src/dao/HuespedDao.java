@@ -84,4 +84,61 @@ public class HuespedDao {
 
     }
 
+    public int modificar(int idHuesped, int id_reserva, String nombre, String apellido, Date fechaNacimiento, String nacionalidad, String telefono) {
+
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        String nacimiento = date.format(fechaNacimiento);
+
+        try {
+            final PreparedStatement statement = conn.prepareStatement(
+                    "UPDATE huespedes SET "
+                    + " id_reserva = ?, "
+                    + " nombre = ?,"
+                    + " apellido = ?,"
+                    + " fechaNacimiento = ?,"
+                    + " nacionalidad = ?,"
+                    + " telefono = ?"
+                    + " WHERE id = ?"
+            );
+
+            try (statement) {
+
+                statement.setInt(1, id_reserva);
+                statement.setString(2, nombre);
+                statement.setString(3, apellido);
+                statement.setDate(4, fechaNacimiento);
+                statement.setString(5, nacionalidad);
+                statement.setString(6, telefono);
+                statement.setInt(7, idHuesped);
+
+                statement.execute();
+
+                int updateCount = statement.getUpdateCount();
+
+                return updateCount;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int eliminar(int idHuesped) {
+
+        try {
+
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM huespedes WHERE id = ?");
+
+            try (statement) {
+                statement.setInt(1, idHuesped);
+                statement.execute();
+
+                int updateCount = statement.getUpdateCount();
+
+                return updateCount;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
