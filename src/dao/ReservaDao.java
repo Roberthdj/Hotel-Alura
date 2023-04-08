@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import modelos.Reserva;
 
 public class ReservaDao {
@@ -16,8 +18,42 @@ public class ReservaDao {
 
     public ReservaDao(Connection conexion) {
         this.conn = conexion;
-    }    
-    
+    }
+
+    public List<Reserva> listar() {
+
+        List<Reserva> resultado = new ArrayList<>();
+
+        try {
+            final PreparedStatement statement = conn
+                    .prepareStatement("SELECT * FROM reservas");
+
+            try (statement) {
+                statement.execute();
+
+                final ResultSet resultSet = statement.getResultSet();
+
+                try (resultSet) {
+
+                    while (resultSet.next()) {
+                        resultado.add(new Reserva(
+                                resultSet.getInt("id"),
+                                resultSet.getDate("fechaEntrada"),
+                                resultSet.getDate("fechaSalida"),
+                                resultSet.getDouble("valor"),
+                                resultSet.getString("tipoHabitacion"),
+                                resultSet.getString("formaPago")
+                        ));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultado;
+    }
+
     public int guardar(Reserva reserva) {
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,15 +80,38 @@ public class ReservaDao {
                 ResultSet resultSet = statement.getGeneratedKeys();
 
                 try (resultSet) {
+
                     while (resultSet.next()) {
                         idReserva = resultSet.getInt(1);
                     }
+
+                    return idReserva;
                 }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }              
-        return idReserva;
+        }
+
+    }
+
+    public int eliminar(int idReserva) {
+
+        try {
+
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM reservas WHERE id = ?");
+
+            try (statement) {
+                statement.setInt(0, idReserva);
+                statement.execute();
+
+                int updateCount = statement.getUpdateCount();
+
+                return updateCount;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

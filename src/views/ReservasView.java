@@ -197,18 +197,19 @@ public class ReservasView extends JFrame {
         });
         btnexit.setLayout(null);
         btnexit.setBackground(new Color(12, 138, 199));
-        btnexit.setBounds(410, 0, 100, 36);
+        btnexit.setBounds(427, 5, 50, 36);
         panel_1.add(btnexit);
 
-        labelExit = new JLabel("Salir >>");
+        labelExit = new JLabel();
         labelExit.setForeground(Color.WHITE);
-        labelExit.setBounds(-5, 0, 80, 36);
-        btnexit.add(labelExit);
+        labelExit.setBounds(0, 0, 50, 36);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
+        labelExit.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/salir.png")));
+        btnexit.add(labelExit);
 
         JPanel header = new JPanel();
-        header.setBounds(0, 0, 910, 36);
+        header.setBounds(0, 0, 910, 40);
         header.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -248,20 +249,21 @@ public class ReservasView extends JFrame {
         });
         btnAtras.setLayout(null);
         btnAtras.setBackground(Color.WHITE);
-        btnAtras.setBounds(0, 0, 75, 35);
+        btnAtras.setBounds(5, 5, 50, 36);
         header.add(btnAtras);
 
-        labelAtras = new JLabel("<< Atrás");
-        labelAtras.setBounds(0, 0, 75, 35);
-        btnAtras.add(labelAtras);
+        labelAtras = new JLabel();
+        labelAtras.setBounds(0, 0, 50, 36);
         labelAtras.setHorizontalAlignment(SwingConstants.CENTER);
         labelAtras.setFont(new Font("Roboto", Font.PLAIN, 18));
+        labelAtras.setIcon(new ImageIcon(ReservasView.class.getResource("/imagenes/atras.png")));
+        btnAtras.add(labelAtras);
 
         JLabel lblSiguiente = new JLabel("SIGUIENTE");
         lblSiguiente.setHorizontalAlignment(SwingConstants.CENTER);
         lblSiguiente.setForeground(Color.WHITE);
         lblSiguiente.setFont(new Font("Roboto", Font.PLAIN, 18));
-        lblSiguiente.setBounds(0, 0, 122, 35);
+        lblSiguiente.setBounds(0, 0, 122, 36);
 
         //Campos que guardaremos en la base de datos
         txtFechaEntrada = new JDateChooser();
@@ -378,7 +380,7 @@ public class ReservasView extends JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }
-    
+
     private void siguiente() {
 
         if (ReservasView.txtFechaEntrada.getDate().before(ReservasView.txtFechaSalida.getDate())
@@ -393,7 +395,7 @@ public class ReservasView extends JFrame {
             reserva.setTipoHabitacion(txtTipoHabitacion.getSelectedItem().toString());
             reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
 
-            this.reservaController.guardar(reserva);            
+            this.reservaController.guardar(reserva);
 
         } else {
             JOptionPane.showMessageDialog(null, "La fecha de CHECK-IN debe igual o mayor a la fecha actual,"

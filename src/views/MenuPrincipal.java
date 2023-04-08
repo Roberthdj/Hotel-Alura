@@ -43,7 +43,7 @@ public class MenuPrincipal extends JFrame {
      * Create the frame.
      */
     public MenuPrincipal() {
-        
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 910, 537);
@@ -86,7 +86,7 @@ public class MenuPrincipal extends JFrame {
 
         //Barra para controlar la ventana 
         JPanel header = new JPanel();
-        header.setBounds(0, 0, 910, 36);
+        header.setBounds(0, 0, 910, 40);
         header.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -127,14 +127,15 @@ public class MenuPrincipal extends JFrame {
         btnexit.setLayout(null);
         btnexit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(820, 0, 100, 36);
+        btnexit.setBounds(855, 5, 50, 36);
         header.add(btnexit);
 
-        labelExit = new JLabel("Salir >>");
-        labelExit.setBounds(0, 0, 80, 36);
-        btnexit.add(labelExit);
+        labelExit = new JLabel();
+        labelExit.setBounds(0, 0, 50, 36);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
+        labelExit.setIcon(new ImageIcon(Busqueda.class.getResource("/imagenes/salir.png")));
+        btnexit.add(labelExit);
 
         //Botón Login
         JPanel btnLogin = new JPanel();

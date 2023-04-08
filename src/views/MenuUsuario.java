@@ -18,7 +18,6 @@ import java.util.Date;
 import java.awt.SystemColor;
 import javax.swing.JSeparator;
 
-
 @SuppressWarnings("serial")
 public class MenuUsuario extends JFrame {
 
@@ -153,7 +152,7 @@ public class MenuUsuario extends JFrame {
         panelMenu.add(separator);
         header.setLayout(null);
         header.setBackground(Color.WHITE);
-        header.setBounds(0, 0, 944, 36);
+        header.setBounds(0, 0, 944, 40);
         contentPane.add(header);
 
         JPanel btnexit = new JPanel();
@@ -178,14 +177,15 @@ public class MenuUsuario extends JFrame {
 
         btnexit.setLayout(null);
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(870, 0, 100, 36); 
+        btnexit.setBounds(890, 5, 50, 36);
         header.add(btnexit);
 
-        labelExit = new JLabel("Salir >>");
-        labelExit.setBounds(-5, 0, 80, 36);
-        btnexit.add(labelExit);
+        labelExit = new JLabel();
+        labelExit.setBounds(0, 0, 50, 36);
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
+        labelExit.setIcon(new ImageIcon(MenuUsuario.class.getResource("/imagenes/salir.png")));
+        btnexit.add(labelExit);
 
         JPanel panelFecha = new JPanel();
         panelFecha.setBackground(new Color(118, 187, 223));

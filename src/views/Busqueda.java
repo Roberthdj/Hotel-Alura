@@ -1,5 +1,7 @@
 package views;
 
+import controller.HuespedController;
+import controller.ReservaController;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +23,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-
 @SuppressWarnings("serial")
 public class Busqueda extends JFrame {
 
@@ -34,6 +35,8 @@ public class Busqueda extends JFrame {
     private JLabel labelAtras;
     private JLabel labelExit;
     int xMouse, yMouse;
+    private ReservaController reservaController;
+    private HuespedController huespedController;
 
     /**
      * Launch the application.
@@ -55,7 +58,10 @@ public class Busqueda extends JFrame {
      * Create the frame.
      */
     public Busqueda() {
-        
+
+        this.reservaController = new ReservaController();
+        this.huespedController = new HuespedController();
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(Busqueda.class.getResource("/imagenes/lupa2.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 910, 571);
@@ -76,7 +82,7 @@ public class Busqueda extends JFrame {
         JLabel lblNewLabel_4 = new JLabel("SISTEMA DE BÚSQUEDA");
         lblNewLabel_4.setForeground(new Color(12, 138, 199));
         lblNewLabel_4.setFont(new Font("Roboto Black", Font.BOLD, 24));
-        lblNewLabel_4.setBounds(331, 62, 280, 42);
+        lblNewLabel_4.setBounds(331, 62, 300, 42);
         contentPane.add(lblNewLabel_4);
 
         JTabbedPane panel = new JTabbedPane(JTabbedPane.TOP);
@@ -113,6 +119,21 @@ public class Busqueda extends JFrame {
         panel.addTab("Huéspedes", new ImageIcon(Busqueda.class.getResource("/imagenes/pessoas.png")), scroll_tableHuespedes, null);
         scroll_tableHuespedes.setVisible(true);
 
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (panel.getSelectedIndex() == 0) {
+                    cargarTablaReserva();
+                }
+
+                if (panel.getSelectedIndex() == 1) {
+                    cargarTablaHuesped();
+                }
+            }
+        });
+// Fin cargar datos 
+
         JLabel lblNewLabel_2 = new JLabel("");
         lblNewLabel_2.setIcon(new ImageIcon(Busqueda.class.getResource("/imagenes/Ha-100px.png")));
         lblNewLabel_2.setBounds(56, 51, 104, 107);
@@ -123,7 +144,6 @@ public class Busqueda extends JFrame {
             @Override
             public void mouseDragged(MouseEvent e) {
                 headerMouseDragged(e);
-
             }
         });
         header.addMouseListener(new MouseAdapter() {
@@ -134,7 +154,7 @@ public class Busqueda extends JFrame {
         });
         header.setLayout(null);
         header.setBackground(Color.WHITE);
-        header.setBounds(0, 0, 910, 36);
+        header.setBounds(0, 0, 910, 40);
         contentPane.add(header);
 
         JPanel btnAtras = new JPanel();
@@ -160,13 +180,14 @@ public class Busqueda extends JFrame {
         });
         btnAtras.setLayout(null);
         btnAtras.setBackground(Color.WHITE);
-        btnAtras.setBounds(0, 0, 100, 36);
+        btnAtras.setBounds(5, 5, 50, 36);
         header.add(btnAtras);
 
-        labelAtras = new JLabel("<< Atrás");
+        labelAtras = new JLabel();
         labelAtras.setHorizontalAlignment(SwingConstants.CENTER);
         labelAtras.setFont(new Font("Roboto", Font.PLAIN, 18));
-        labelAtras.setBounds(0, 0, 80, 36);
+        labelAtras.setBounds(0, 0, 50, 36);
+        labelAtras.setIcon(new ImageIcon(Busqueda.class.getResource("/imagenes/atras.png")));
         btnAtras.add(labelAtras);
 
         JPanel btnexit = new JPanel();
@@ -192,15 +213,16 @@ public class Busqueda extends JFrame {
         });
         btnexit.setLayout(null);
         btnexit.setBackground(Color.WHITE);
-        btnexit.setBounds(830, 0, 100, 36);
+        btnexit.setBounds(857, 5, 50, 40);
         header.add(btnexit);
 
-        labelExit = new JLabel("Salir >>");
+        labelExit = new JLabel();
         labelExit.setHorizontalAlignment(SwingConstants.CENTER);
         labelExit.setForeground(Color.BLACK);
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
-        labelExit.setBounds(0, 0, 80, 36);
+        labelExit.setBounds(0, 0, 50, 40);
         btnexit.add(labelExit);
+        labelExit.setIcon(new ImageIcon(Busqueda.class.getResource("/imagenes/salir.png")));
 
         JSeparator separator_1_2 = new JSeparator();
         separator_1_2.setForeground(new Color(12, 138, 199));
@@ -258,7 +280,7 @@ public class Busqueda extends JFrame {
         setResizable(false);
     }
 
-//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
+// Código que permite mover la ventana por la pantalla según la posición de "x" y "y"
     private void headerMousePressed(java.awt.event.MouseEvent evt) {
         xMouse = evt.getX();
         yMouse = evt.getY();
@@ -269,4 +291,38 @@ public class Busqueda extends JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }
+
+//Código que listar los registros en las tablas
+    private void cargarTablaReserva() {
+        var reservas = this.reservaController.listar();
+
+        reservas.forEach(reserva -> modelo.addRow(
+                new Object[]{
+                    reserva.getId(),
+                    reserva.getFechaEntrada(),
+                    reserva.getFechaSalida(),
+                    reserva.getValor(),
+                    reserva.getTipoHabitacion(),
+                    reserva.getFormaPago()
+                }
+        ));
+    }
+
+    private void cargarTablaHuesped() {
+
+        var huespedes = this.huespedController.listar();
+
+        huespedes.forEach(huesped -> modeloHuesped.addRow(
+                new Object[]{
+                    huesped.getId(),
+                    huesped.getId_reserva(),
+                    huesped.getNombre(),
+                    huesped.getApellido(),
+                    huesped.getFechaNacimiento(),
+                    huesped.getNacionalidad(),
+                    huesped.getTelefono()
+                }
+        ));
+    }
+
 }
