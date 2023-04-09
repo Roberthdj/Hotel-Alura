@@ -18,6 +18,10 @@ public class HuespedController {
     public List<Huesped> listar() {
         return huespedDao.listar();
     }
+    
+        public List<Huesped> listarBusqueda(String cadena) {
+        return huespedDao.listarBusqueda(cadena);
+    }
 
     public void guardar(Huesped huesped) {
         this.huespedDao.guardar(huesped);

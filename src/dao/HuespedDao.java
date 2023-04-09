@@ -53,6 +53,42 @@ public class HuespedDao {
         return resultado;
     }
 
+    public List<Huesped> listarBusqueda(String cadena) {
+
+        List<Huesped> resultado = new ArrayList<>();
+
+        try {
+            final PreparedStatement statement = conn
+                    .prepareStatement("SELECT * FROM huespedes WHERE apellido LIKE ?");
+
+            try (statement) {
+                statement.setString(1, cadena + "%");
+                statement.execute();
+
+                final ResultSet resultSet = statement.getResultSet();
+
+                try (resultSet) {
+
+                    while (resultSet.next()) {
+                        resultado.add(new Huesped(
+                                resultSet.getInt("id"),
+                                resultSet.getInt("id_reserva"),
+                                resultSet.getString("nombre"),
+                                resultSet.getString("apellido"),
+                                resultSet.getDate("fechaNacimiento"),
+                                resultSet.getString("nacionalidad"),
+                                resultSet.getString("telefono")
+                        ));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    
+        return resultado;
+    }
+
     public void guardar(Huesped huesped) {
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String nacimiento = date.format(huesped.getFechaNacimiento());

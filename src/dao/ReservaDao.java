@@ -53,6 +53,41 @@ public class ReservaDao {
 
         return resultado;
     }
+    
+    public List<Reserva> listarBusqueda(int idBusqueda) {
+
+        List<Reserva> resultado = new ArrayList<>();
+
+        try {
+            final PreparedStatement statement = conn
+                    .prepareStatement("SELECT * FROM reservas WHERE id = ?");
+
+            try (statement) {
+                statement.setInt(1, idBusqueda);
+                statement.execute();
+
+                final ResultSet resultSet = statement.getResultSet();
+
+                try (resultSet) {
+
+                    while (resultSet.next()) {
+                        resultado.add(new Reserva(
+                                resultSet.getInt("id"),
+                                resultSet.getDate("fechaEntrada"),
+                                resultSet.getDate("fechaSalida"),
+                                resultSet.getDouble("valor"),
+                                resultSet.getString("tipoHabitacion"),
+                                resultSet.getString("formaPago")
+                        ));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return resultado;
+    }
 
     public int guardar(Reserva reserva) {
 

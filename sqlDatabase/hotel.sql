@@ -21,6 +21,5 @@ nacionalidad VARCHAR(50) NOT NULL,
 telefono VARCHAR(35) NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_reserva) REFERENCES reservas(id)
-ON DELETE CASCADE
 )ENGINE=InnoDB;
 
