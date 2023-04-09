@@ -1,5 +1,6 @@
 package views;
 
+import com.toedter.calendar.JDateChooser;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -25,7 +25,6 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.util.Date;
-import utilidades.Utilidades;
 import modelos.Reserva;
 import controller.ReservaController;
 
@@ -41,6 +40,7 @@ public class ReservasView extends JFrame {
     private JLabel labelExit;
     private JLabel labelAtras;
     private double valorReserva;
+    private int idReserva;
     private ReservaController reservaController;
 
     /**
@@ -230,9 +230,7 @@ public class ReservasView extends JFrame {
         btnAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MenuUsuario usuario = new MenuUsuario();
-                usuario.setVisible(true);
-                dispose();
+                llamarMenuUsuario();
             }
 
             @Override
@@ -247,6 +245,7 @@ public class ReservasView extends JFrame {
                 labelAtras.setForeground(Color.black);
             }
         });
+
         btnAtras.setLayout(null);
         btnAtras.setBackground(Color.WHITE);
         btnAtras.setBounds(5, 5, 50, 36);
@@ -294,12 +293,13 @@ public class ReservasView extends JFrame {
 
         txtFechaSalida.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent evt) {
-                Utilidades utilidad = new Utilidades(); // Calculando el valor de la reserva para guardar en la DB
-                valorReserva = utilidad.calcularValorReserva(txtFechaEntrada, txtFechaSalida);
+
+                valorReserva = reservaController.calcularValorReserva(txtFechaEntrada, txtFechaSalida);
 
                 DecimalFormat formato = new DecimalFormat("#,###,##0.00"); // Mostrando el valor de la reserva con formato
                 String valorFormateado = formato.format(valorReserva);
                 txtValor.setText("$ " + valorFormateado);
+
             }
         });
 
@@ -380,6 +380,17 @@ public class ReservasView extends JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }
 
+    private void llamarMenuUsuario() {
+        MenuUsuario usuario = new MenuUsuario();
+        usuario.setVisible(true);
+    }
+
+    private void llamarRegistroHuesped(int idReserva) {
+        RegistroHuesped registro = new RegistroHuesped();
+        registro.setIdReserva(idReserva);
+        registro.setVisible(true);
+    }
+
     private void siguiente() {
 
         if (ReservasView.txtFechaEntrada.getDate().before(ReservasView.txtFechaSalida.getDate())
@@ -393,15 +404,20 @@ public class ReservasView extends JFrame {
             reserva.setValor(valorReserva);
             reserva.setTipoHabitacion(txtTipoHabitacion.getSelectedItem().toString());
             reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
-
-            this.reservaController.guardar(reserva);
-            JOptionPane.showMessageDialog(null, "Se ha creado una nueva reserva, porfavor \n"
-                    + "llene los datos del huesped!");
+       
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas crear la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                idReserva = this.reservaController.guardar(reserva);
+                JOptionPane.showMessageDialog(this, "Se ha creado una reserva!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                llamarRegistroHuesped(idReserva);
+            } else {
+                JOptionPane.showMessageDialog(this, "Inconsistencia en los datos ingresados", "WARNING", JOptionPane.WARNING_MESSAGE);
+                llamarMenuUsuario();
+            }
+            
             dispose();
 
         } else {
-            JOptionPane.showMessageDialog(null, "La fecha de CHECK-IN debe igual o mayor a la fecha actual,\n"
-                    + "la fecha de CHECK-OUT debe se mayor a la de CHECK-IN.");
+            JOptionPane.showMessageDialog(this, "Inconsistencia en los datos ingresados", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
 
     }

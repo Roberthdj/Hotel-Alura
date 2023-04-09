@@ -368,7 +368,7 @@ public class Busqueda extends JFrame {
 
     private void editarReserva() {
         if (tbReservas.getSelectedRowCount() == 0 || tbReservas.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila");
         } else {
             
             int idReserva = (int) modelo.getValueAt(tbReservas.getSelectedRow(), 0);
@@ -379,13 +379,13 @@ public class Busqueda extends JFrame {
             String formaPago = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 5);
 
             int resultado = this.reservaController.modificar(idReserva, fechaEntrada, fechaSalida, valor, tipoHabitacion, formaPago);
-            JOptionPane.showMessageDialog(this, "Se han editado " + resultado + "registros!");
+            JOptionPane.showMessageDialog(this, "Se han editado " + resultado + " registros!");
         }
     }
 
     private void editarHuesped() {
         if (tbHuespedes.getSelectedRowCount() == 0 || tbHuespedes.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila");
         } else {
             int idHuesped = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0);
             String nombre = (String) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1);
@@ -396,7 +396,7 @@ public class Busqueda extends JFrame {
             int idReserva = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6);
 
             int resultado = this.huespedController.modificar(idHuesped, idReserva, nombre, apellido, fechaNacimiento, nacionalidad, telefono);
-            JOptionPane.showMessageDialog(this, "Se han editado " + resultado + "registros!");
+            JOptionPane.showMessageDialog(this, "Se han editado " + resultado + " registros!");
         }
 
     }

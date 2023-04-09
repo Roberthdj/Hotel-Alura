@@ -106,7 +106,7 @@ public class HuespedDao {
                 statement.setInt(1, id_reserva);
                 statement.setString(2, nombre);
                 statement.setString(3, apellido);
-                statement.setDate(4, fechaNacimiento);
+                statement.setDate(4, Date.valueOf(nacimiento));
                 statement.setString(5, nacionalidad);
                 statement.setString(6, telefono);
                 statement.setInt(7, idHuesped);

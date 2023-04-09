@@ -372,6 +372,16 @@ public class RegistroHuesped extends JFrame {
         txtNreserva.setText(String.valueOf(idReserva));
     }
 
+    public void llamarReservasView() {
+        ReservasView reserva = new ReservasView();
+        reserva.setVisible(true);
+    }
+
+    public void llamarBusqueda() {
+        Busqueda busqueda = new Busqueda();
+        busqueda.setVisible(true);
+    }
+
     public void guardar() {
 
         if (!txtNombre.getText().equals("") && !txtApellido.getText().equals("") && txtFechaN.getDate() != null && !txtTelefono.getText().equals("")) {
@@ -385,15 +395,18 @@ public class RegistroHuesped extends JFrame {
             huesped.setNacionalidad(txtNacionalidad.getSelectedItem().toString());
             huesped.setTelefono(txtTelefono.getText());
 
-            this.huespedController.guardar(huesped);
-
-            JOptionPane.showMessageDialog(null, "El registro se ha guardado exitosamente!");
-            MenuUsuario usuario = new MenuUsuario();
-            usuario.setVisible(true);
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas crear el registro?", "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                this.huespedController.guardar(huesped);
+                JOptionPane.showMessageDialog(this, "Se ha creado un registro!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                llamarReservasView();
+            } else {
+                JOptionPane.showMessageDialog(this, "La reserva " + idReserva + " debe ser eliminada!", "WARNING", JOptionPane.WARNING_MESSAGE);
+                llamarBusqueda();
+            }
             dispose();
 
         } else {
-            JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+            JOptionPane.showMessageDialog(this, "Debes llenar todos los campos!", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
     }
 
