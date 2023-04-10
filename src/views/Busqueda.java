@@ -379,7 +379,7 @@ public class Busqueda extends JFrame {
             var reservas = this.reservaController.listarBusqueda(idBusqueda);
 
             if (reservas.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "El número de reserva no existe!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El número de reserva no existe!", "WARNING", JOptionPane.WARNING_MESSAGE);
                 limpiarTabla(modelo);
                 cargarTablaReserva();
                 limpiarTxtBuscar();
