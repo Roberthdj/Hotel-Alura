@@ -42,8 +42,11 @@ public class MenuPrincipal extends JFrame {
     /**
      * Create the frame.
      */
-    public MenuPrincipal() {
-
+    public MenuPrincipal() {        
+        crearFormulario();        
+    }
+    
+    public void crearFormulario(){
         setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 910, 537);

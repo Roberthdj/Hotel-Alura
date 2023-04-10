@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import com.toedter.calendar.JDateChooser;
 import controller.HuespedController;
+import controller.ReservaController;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
@@ -40,6 +41,7 @@ public class RegistroHuesped extends JFrame {
     int xMouse, yMouse;
     private int idReserva;
     private HuespedController huespedController;
+    private ReservaController reservaController;
 
     /**
      * Launch the application.
@@ -62,9 +64,11 @@ public class RegistroHuesped extends JFrame {
      * Create the frame.
      */
     public RegistroHuesped() {
-
         this.huespedController = new HuespedController();
+        crearFormulario();
+    }
 
+    public void crearFormulario() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHuesped.class.getResource("/imagenes/lOGO-50PX.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 910, 634);
@@ -101,10 +105,11 @@ public class RegistroHuesped extends JFrame {
         btnAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-// Colocar opcion para eliminar reserva creada
-                ReservasView reservas = new ReservasView();
-                reservas.setVisible(true);
+                eliminarReserva();
+                ReservasView reserva = new ReservasView();
+                reserva.setVisible(true);
                 dispose();
+
             }
 
             @Override
@@ -322,9 +327,8 @@ public class RegistroHuesped extends JFrame {
         btnexit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MenuPrincipal principal = new MenuPrincipal();
-                principal.setVisible(true);
-                dispose();
+                eliminarReserva();
+                llamarMenuPrincipal();
             }
 
             @Override
@@ -352,7 +356,6 @@ public class RegistroHuesped extends JFrame {
         labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
         labelExit.setIcon(new ImageIcon(Login.class.getResource("/imagenes/salir.png")));
         btnexit.add(labelExit);
-
     }
 
     //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
@@ -367,47 +370,60 @@ public class RegistroHuesped extends JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }
 
+    //Código que permite realizar acciones CRUD
+    public void guardar() {
+
+        if (!txtNombre.getText().equals("") && !txtApellido.getText().equals("") && txtFechaN.getDate() != null && !txtTelefono.getText().equals("")) {
+
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas crear el registro?", "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                var huesped = new Huesped();
+
+                huesped.setId_reserva(this.idReserva);
+                huesped.setNombre(txtNombre.getText());
+                huesped.setApellido(txtApellido.getText());
+                huesped.setFechaNacimiento(txtFechaN.getDate());
+                huesped.setNacionalidad(txtNacionalidad.getSelectedItem().toString());
+                huesped.setTelefono(txtTelefono.getText());
+                this.huespedController.guardar(huesped);
+                JOptionPane.showMessageDialog(this, "Se ha creado un huésped!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                llamarReservasView();
+            } else {
+                eliminarReserva();
+                llamarReservasView();
+            }
+            dispose();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Error en los datos, corrija la información ingresada!", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void eliminarReserva() {
+        this.reservaController = new ReservaController();
+        try {
+            this.reservaController.eliminar(idReserva);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error en el proceso!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    //Código que permite realizar obtener un dato de otro formulario    
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
         txtNreserva.setText(String.valueOf(idReserva));
     }
 
+    //---------------------------------------------------------------
     public void llamarReservasView() {
         ReservasView reserva = new ReservasView();
         reserva.setVisible(true);
     }
 
-    public void llamarBusqueda() {
-        Busqueda busqueda = new Busqueda();
-        busqueda.setVisible(true);
-    }
-
-    public void guardar() {
-
-        if (!txtNombre.getText().equals("") && !txtApellido.getText().equals("") && txtFechaN.getDate() != null && !txtTelefono.getText().equals("")) {
-
-            var huesped = new Huesped();
-
-            huesped.setId_reserva(this.idReserva);
-            huesped.setNombre(txtNombre.getText());
-            huesped.setApellido(txtApellido.getText());
-            huesped.setFechaNacimiento(txtFechaN.getDate());
-            huesped.setNacionalidad(txtNacionalidad.getSelectedItem().toString());
-            huesped.setTelefono(txtTelefono.getText());
-
-            if (JOptionPane.showConfirmDialog(this, "¿Deseas crear el registro?", "Confirmación", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                this.huespedController.guardar(huesped);
-                JOptionPane.showMessageDialog(this, "Se ha creado un registro!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-                llamarReservasView();
-            } else {
-                JOptionPane.showMessageDialog(this, "La reserva " + idReserva + " debe ser eliminada!", "WARNING", JOptionPane.WARNING_MESSAGE);
-                llamarBusqueda();
-            }
-            dispose();
-
-        } else {
-            JOptionPane.showMessageDialog(this, "Debes llenar todos los campos!", "WARNING", JOptionPane.WARNING_MESSAGE);
-        }
+    public void llamarMenuPrincipal() {
+        MenuPrincipal principal = new MenuPrincipal();
+        principal.setVisible(true);
+        dispose();
     }
 
 }

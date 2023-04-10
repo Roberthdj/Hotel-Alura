@@ -50,7 +50,11 @@ public class Login extends JFrame {
      * Create the frame.
      */
     public Login() {
-        setResizable(false);
+        crearFormulario();
+    }
+
+    private void crearFormulario(){
+                setResizable(false);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 788, 527);
@@ -236,7 +240,7 @@ public class Login extends JFrame {
         panel.add(header);
         header.setLayout(null);
     }
-
+    
     private void Login() {
         String Usuario = "admin";
         String Contraseña = "admin";

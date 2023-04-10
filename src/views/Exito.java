@@ -38,6 +38,10 @@ public class Exito extends JDialog {
      * Create the dialog.
      */
     public Exito() {
+        crearFormulario();
+    }
+
+    public void crearFormulario() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(Exito.class.getResource("/imagenes/aH-40px.png")));
         setBounds(100, 100, 394, 226);
         getContentPane().setLayout(new BorderLayout());

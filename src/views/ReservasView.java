@@ -64,9 +64,11 @@ public class ReservasView extends JFrame {
      */
     public ReservasView() {
         super("Reserva");
-
         this.reservaController = new ReservaController();
+        crearFormulario();
+    }
 
+    public void crearFormulario() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(ReservasView.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 910, 560);
@@ -178,9 +180,7 @@ public class ReservasView extends JFrame {
         btnexit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MenuPrincipal principal = new MenuPrincipal();
-                principal.setVisible(true);
-                dispose();
+                llamarMenuPrincipal();
             }
 
             @Override
@@ -275,6 +275,7 @@ public class ReservasView extends JFrame {
         txtFechaEntrada.setBorder(new LineBorder(SystemColor.window));
         txtFechaEntrada.setDateFormatString("yyyy-MM-dd");
         txtFechaEntrada.setFont(new Font("Roboto", Font.PLAIN, 18));
+        txtFechaEntrada.setMinSelectableDate(new Date());
         txtFechaEntrada.setDate(new Date());
         panel.add(txtFechaEntrada);
 
@@ -286,9 +287,10 @@ public class ReservasView extends JFrame {
         txtFechaSalida.setBackground(Color.WHITE);
         txtFechaSalida.setFont(new Font("Roboto", Font.PLAIN, 18));
         txtFechaSalida.setDateFormatString("yyyy-MM-dd");
-        txtFechaSalida.getCalendarButton().setBackground(SystemColor.textHighlight);//
+        txtFechaSalida.getCalendarButton().setBackground(SystemColor.textHighlight);
         txtFechaSalida.setBorder(new LineBorder(new Color(255, 255, 255), 0));
-        txtFechaSalida.setDate(new Date()); //
+        txtFechaSalida.setMinSelectableDate(new Date());
+        txtFechaSalida.setDate(new Date());
         panel.add(txtFechaSalida);
 
         txtFechaSalida.addPropertyChangeListener(new PropertyChangeListener() {
@@ -365,7 +367,6 @@ public class ReservasView extends JFrame {
                 }
             }
         });
-
     }
 
     //Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
@@ -380,9 +381,16 @@ public class ReservasView extends JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }
 
+    //Código que permite llamar Formularios
     private void llamarMenuUsuario() {
         MenuUsuario usuario = new MenuUsuario();
         usuario.setVisible(true);
+    }
+
+    public void llamarMenuPrincipal() {
+        MenuPrincipal principal = new MenuPrincipal();
+        principal.setVisible(true);
+        dispose();
     }
 
     private void llamarRegistroHuesped(int idReserva) {
@@ -391,34 +399,30 @@ public class ReservasView extends JFrame {
         registro.setVisible(true);
     }
 
+    //Código que permite configurar acciones
     private void siguiente() {
 
-        if (ReservasView.txtFechaEntrada.getDate().before(ReservasView.txtFechaSalida.getDate())
-                && ReservasView.txtFechaSalida.getDate().after(ReservasView.txtFechaEntrada.getDate())
-                && valorReserva != 0) {
+        if (ReservasView.txtFechaEntrada.getDate().before(ReservasView.txtFechaSalida.getDate()) && valorReserva > 0.0) {
 
-            var reserva = new Reserva();
-
-            reserva.setFechaEntrada(txtFechaEntrada.getDate());
-            reserva.setFechaSalida(txtFechaSalida.getDate());
-            reserva.setValor(valorReserva);
-            reserva.setTipoHabitacion(txtTipoHabitacion.getSelectedItem().toString());
-            reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
-       
             if (JOptionPane.showConfirmDialog(this, "¿Deseas crear la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                var reserva = new Reserva();
+
+                reserva.setFechaEntrada(txtFechaEntrada.getDate());
+                reserva.setFechaSalida(txtFechaSalida.getDate());
+                reserva.setValor(valorReserva);
+                reserva.setTipoHabitacion(txtTipoHabitacion.getSelectedItem().toString());
+                reserva.setFormaPago(txtFormaPago.getSelectedItem().toString());
                 idReserva = this.reservaController.guardar(reserva);
                 JOptionPane.showMessageDialog(this, "Se ha creado una reserva!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
                 llamarRegistroHuesped(idReserva);
+
             } else {
-                JOptionPane.showMessageDialog(this, "Inconsistencia en los datos ingresados", "WARNING", JOptionPane.WARNING_MESSAGE);
                 llamarMenuUsuario();
             }
-            
             dispose();
-
         } else {
-            JOptionPane.showMessageDialog(this, "Inconsistencia en los datos ingresados", "WARNING", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error en los datos, corrija la información ingresada!", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
-
     }
 }

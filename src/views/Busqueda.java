@@ -23,7 +23,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
@@ -63,12 +62,13 @@ public class Busqueda extends JFrame {
         this.reservaController = new ReservaController();
         this.huespedController = new HuespedController();
 
-        crearFrame();
+        crearFormulario();
         cargarTablaReserva();
         cargarTablaHuesped();
     }
 
-    private void crearFrame() { // Código que permite crear el frame
+// Código que permite crear la ventana
+    private void crearFormulario() { // Código que permite crear el frame
 
         setIconImage(Toolkit.getDefaultToolkit().getImage(Busqueda.class.getResource("/imagenes/lupa2.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -206,9 +206,7 @@ public class Busqueda extends JFrame {
         btnexit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MenuUsuario usuario = new MenuUsuario();
-                usuario.setVisible(true);
-                dispose();
+                llamarMenuUsuario();
             }
 
             @Override
@@ -338,30 +336,8 @@ public class Busqueda extends JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }
-// Código para procesos de autenticación y limpieza
 
-    private boolean isNumeric(String cadena) {
-        try {
-            Integer.parseInt(cadena);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-    }
-
-    private void limpiarTabla(DefaultTableModel modelo) {
-        int filas = modelo.getRowCount() - 1;
-        for (int i = filas; i >= 0; i--) {
-            modelo.removeRow(i);
-        }
-    }
-
-    private void limpiarTxtBuscar() {
-        txtBuscar.setText("");
-        txtBuscar.requestFocus();
-    }
-
-//Código para operar con los registros en las tablas
+//Código para listar, editar y eliminar 
     private void cargarTablaReserva() {
         var reservas = this.reservaController.listar();
 
@@ -465,10 +441,10 @@ public class Busqueda extends JFrame {
 
     private void editarReserva() {
         if (tbReservas.getSelectedRowCount() == 0 || tbReservas.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una reserva!", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
 
-            if (JOptionPane.showConfirmDialog(this, "¿Deseas modificar la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas modificar la información del huesped?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
                 int idReserva = (int) modelo.getValueAt(tbReservas.getSelectedRow(), 0);
 
@@ -482,7 +458,7 @@ public class Busqueda extends JFrame {
                 String formaPago = modelo.getValueAt(tbReservas.getSelectedRow(), 5).toString().trim();
 
                 this.reservaController.modificar(idReserva, fechaEntrada, fechaSalida, valor, tipoHabitacion, formaPago);
-                JOptionPane.showMessageDialog(this, "La reserva " + idReserva + " se ha modificado!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La reserva número " + idReserva + " se ha modificado.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
                 limpiarTxtBuscar();
@@ -492,10 +468,10 @@ public class Busqueda extends JFrame {
 
     private void editarHuesped() {
         if (tbHuespedes.getSelectedRowCount() == 0 || tbHuespedes.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un huésped!", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
 
-            if (JOptionPane.showConfirmDialog(this, "¿Deseas modificar la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas modificar la información del huésped?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
                 int idHuesped = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0);
                 String nombre = modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 1).toString().trim();
@@ -509,38 +485,84 @@ public class Busqueda extends JFrame {
                 int idReserva = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6);
 
                 this.huespedController.modificar(idHuesped, idReserva, nombre, apellido, fechaNacimiento, nacionalidad, telefono);
-                JOptionPane.showMessageDialog(this, "La reserva " + idReserva + " se ha modificado!!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "El huésped número " + idHuesped + " se ha modificado.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
                 limpiarTxtBuscar();
             }
-
         }
-
     }
 
     private void eliminarReserva() {
         if (tbReservas.getSelectedRowCount() == 0 || tbReservas.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una reserva!", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
 
-            int idReserva = (int) modelo.getValueAt(tbReservas.getSelectedRow(), 0);
-            int resultado = this.reservaController.eliminar(idReserva);
-            JOptionPane.showMessageDialog(this, "Se han eliminado " + resultado + "registros!");
-            modelo.removeRow(tbReservas.getSelectedRow());
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas eliminar la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
+                int idReserva = (int) modelo.getValueAt(tbReservas.getSelectedRow(), 0);
+
+                try {
+                    int resultado = this.reservaController.eliminar(idReserva);
+                    if (resultado > 0) {
+                        JOptionPane.showMessageDialog(this, "La reserva número " + idReserva + " ha sido eliminada.", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                        modelo.removeRow(tbReservas.getSelectedRow());
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Primero debes eliminar el huésped asociado a la reserva número " + idReserva + "!", "WARNING", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
         }
     }
 
     private void eliminarHuesped() {
         if (tbHuespedes.getSelectedRowCount() == 0 || tbHuespedes.getSelectedColumnCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Por favor, elije un item");
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un registro!", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
-            int idReserva = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0);
-            int resultado = this.huespedController.eliminar(idReserva);
-            JOptionPane.showMessageDialog(this, "Se han eliminado " + resultado + "registros!");
-            modeloHuesped.removeRow(tbHuespedes.getSelectedRow());
+            if (JOptionPane.showConfirmDialog(this, "¿Deseas eliminar la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                int idHuesped = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0);
+                try {
+                    int resultado = this.huespedController.eliminar(idHuesped);
+                    if (resultado > 0) {
+                        JOptionPane.showMessageDialog(this, "El huésped número " + idHuesped + " ha sido eliminado, por favor elimine la reserva asociada", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                        modeloHuesped.removeRow(tbHuespedes.getSelectedRow());
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error en el proceso!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
+    }
+
+    // Código para procesos de validación y limpieza
+    private boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    private void limpiarTabla(DefaultTableModel modelo) {
+        int filas = modelo.getRowCount() - 1;
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private void limpiarTxtBuscar() {
+        txtBuscar.setText("");
+        txtBuscar.requestFocus();
+    }
+
+    //  Código para llamar formularios
+    public void llamarMenuUsuario() {
+        MenuUsuario usuario = new MenuUsuario();
+        usuario.setVisible(true);
+        dispose();
     }
 
 }
