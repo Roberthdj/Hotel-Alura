@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
@@ -23,10 +25,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.sql.Date;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
-public class Busqueda extends JFrame {
+public class Busqueda extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     private JTextField txtBuscar;
@@ -37,6 +42,11 @@ public class Busqueda extends JFrame {
     private JLabel labelAtras;
     private JLabel labelExit;
     int xMouse, yMouse;
+
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem itemRegistro, itemBusqueda, itemSalir, itemPrincipal;
+
     private ReservaController reservaController;
     private HuespedController huespedController;
 
@@ -80,6 +90,8 @@ public class Busqueda extends JFrame {
         contentPane.setLayout(null);
         setLocationRelativeTo(null);
         setUndecorated(true);
+
+        crearMenu();
 
         txtBuscar = new JTextField();
         txtBuscar.setBounds(536, 127, 193, 31);
@@ -563,6 +575,43 @@ public class Busqueda extends JFrame {
         MenuUsuario usuario = new MenuUsuario();
         usuario.setVisible(true);
         dispose();
+    }
+
+    private void crearMenu() {
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menu = new JMenu("Opciones");
+        menuBar.add(menu);
+        itemPrincipal = new JMenuItem("Menú principal");
+        itemPrincipal.addActionListener(this);
+        menu.add(itemPrincipal);
+        itemRegistro = new JMenuItem("Registro de reservas");
+        itemRegistro.addActionListener(this);
+        menu.add(itemRegistro);
+        itemBusqueda = new JMenuItem("Busqueda");
+        itemBusqueda.addActionListener(this);
+        menu.add(itemBusqueda);
+        menu.addSeparator();
+        itemSalir = new JMenuItem("Salir");
+        itemSalir.addActionListener(this);
+        menu.add(itemSalir);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == itemPrincipal) {
+            MenuUsuario usuario = new MenuUsuario();
+            usuario.setVisible(true);
+            dispose();
+        }
+        if (e.getSource() == itemRegistro) {
+            ReservasView reservas = new ReservasView();
+            reservas.setVisible(true);
+            dispose();
+        }
+        if (e.getSource() == itemSalir) {
+            System.exit(0);
+        }
     }
 
 }

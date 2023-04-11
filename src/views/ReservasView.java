@@ -27,9 +27,14 @@ import javax.swing.border.LineBorder;
 import java.util.Date;
 import modelos.Reserva;
 import controller.ReservaController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
-public class ReservasView extends JFrame {
+public class ReservasView extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     public static JTextField txtValor;
@@ -41,6 +46,11 @@ public class ReservasView extends JFrame {
     private JLabel labelAtras;
     private double valorReserva;
     private int idReserva;
+
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem itemRegistro, itemBusqueda, itemSalir, itemPrincipal;
+
     private ReservaController reservaController;
 
     /**
@@ -81,6 +91,8 @@ public class ReservasView extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setUndecorated(true);
+
+        crearMenu();
 
         JPanel panel = new JPanel();
         panel.setBorder(null);
@@ -381,7 +393,43 @@ public class ReservasView extends JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }
 
-    //Código que permite llamar Formularios
+    // Crear Menu de Oopciones de usuario
+    private void crearMenu() {
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menu = new JMenu("Opciones");
+        menuBar.add(menu);
+        itemPrincipal = new JMenuItem("Menú principal");
+        itemPrincipal.addActionListener(this);
+        menu.add(itemPrincipal);
+        itemRegistro = new JMenuItem("Registro de reservas");
+        itemRegistro.addActionListener(this);
+        menu.add(itemRegistro);
+        itemBusqueda = new JMenuItem("Busqueda");
+        itemBusqueda.addActionListener(this);
+        menu.add(itemBusqueda);
+        menu.addSeparator();
+        itemSalir = new JMenuItem("Salir");
+        itemSalir.addActionListener(this);
+        menu.add(itemSalir);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == itemPrincipal) {
+            llamarMenuUsuario();
+        }
+        if (e.getSource() == itemBusqueda) {
+            Busqueda busqueda = new Busqueda();
+            busqueda.setVisible(true);
+            dispose();
+        }
+        if (e.getSource() == itemSalir) {
+            System.exit(0);
+        }
+    }
+
+//Código que permite llamar Formularios
     private void llamarMenuUsuario() {
         MenuUsuario usuario = new MenuUsuario();
         usuario.setVisible(true);

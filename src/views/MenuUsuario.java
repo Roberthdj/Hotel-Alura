@@ -16,15 +16,23 @@ import java.awt.event.MouseMotionAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
-public class MenuUsuario extends JFrame {
+public class MenuUsuario extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     int xMouse, yMouse;
     private JLabel labelExit;
     private JLabel labelRegistro;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem itemRegistro, itemBusqueda, itemSalir, itemPrincipal;
 
     /**
      * Launch the application.
@@ -45,12 +53,12 @@ public class MenuUsuario extends JFrame {
     /**
      * Create the frame.
      */
-    public MenuUsuario() {        
-        crearFormulario();    
+    public MenuUsuario() {
+        crearFormulario();
     }
-    
-    public void crearFormulario(){
-            
+
+    public void crearFormulario() {
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(MenuUsuario.class.getResource("/imagenes/aH-40px.png")));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 944, 609);
@@ -62,6 +70,8 @@ public class MenuUsuario extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setUndecorated(true);
+
+        crearMenu(); // Menú de opciones de usuario
 
         JPanel header = new JPanel();
         header.addMouseMotionListener(new MouseMotionAdapter() {
@@ -256,5 +266,43 @@ public class MenuUsuario extends JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
+    }
+    
+    // Crear Menu de Oopciones de usuario
+    private void crearMenu() {
+        menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menu = new JMenu("Opciones");
+        menuBar.add(menu);
+        itemPrincipal = new JMenuItem("Menú principal");
+        itemPrincipal.addActionListener(this);
+        menu.add(itemPrincipal);
+        itemRegistro = new JMenuItem("Registro de reservas");
+        itemRegistro.addActionListener(this);
+        menu.add(itemRegistro);
+        itemBusqueda = new JMenuItem("Busqueda");
+        itemBusqueda.addActionListener(this);
+        menu.add(itemBusqueda);
+        menu.addSeparator();
+        itemSalir = new JMenuItem("Salir");
+        itemSalir.addActionListener(this);
+        menu.add(itemSalir);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == itemRegistro) {
+            ReservasView reservas = new ReservasView();
+            reservas.setVisible(true);
+            dispose();
+        }
+        if (e.getSource() == itemBusqueda) {
+            Busqueda busqueda = new Busqueda();
+            busqueda.setVisible(true);
+            dispose();
+        }
+        if (e.getSource() == itemSalir) {
+            System.exit(0);
+        }
     }
 }
