@@ -58,9 +58,9 @@ El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocion
 
 <div align="center">
 
-  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Reserva.png" alt="netbeans" width="300" height="200"/>
-  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Huesped.png" alt="netbeans" width="300" height="200"/>
-  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Busqueda.png" alt="netbeans" width="300" height="200"/>  
+  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Reserva.png" alt="netbeans" width="350" height="250"/>
+  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Huesped.png" alt="netbeans" width="350" height="250"/>
+  <img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/img-readme/Busqueda.png" alt="netbeans" width="350" height="250"/>  
 
 </div>
 
@@ -68,11 +68,11 @@ El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocion
 
 ## Herramentas utilizadas
 
-<a href="https://www.java.com" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> Ver. 19.0.1</a> 
+- <a href="https://www.java.com" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> Ver. 19.0.1</a> 
 
-<a href="https://netbeans.apache.org/" target="_blank"> <img src="https://netbeans.apache.org/images/apache-netbeans.svg" alt="netbeans" width="40" height="40"/>Apache NetBeans IDE 14</a>
+- <a href="https://netbeans.apache.org/" target="_blank"> <img src="https://netbeans.apache.org/images/apache-netbeans.svg" alt="netbeans" width="40" height="40"/>Apache NetBeans IDE 14</a>
 
-<a href="https://www.mysql.com/" target="_blank"> <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="netbeans" width="40" height="40"/>   Ver. 8.0.32</a>
+- <a href="https://www.mysql.com/" target="_blank"> <img src="https://www.mysql.com/common/logos/logo-mysql-170x115.png" alt="netbeans" width="40" height="40"/>   Ver. 8.0.32</a>
 
 ###
 
