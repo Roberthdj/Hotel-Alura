@@ -29,18 +29,30 @@
 ## Descripción del proyecto 
 
 <p align="justify">
-  Este proyecto se desarrolla para llevar el control de las reservas en el hotel Alura, su finalidad es llevar al campo práctico los contenidos estudiados durante el desarrollo del curso de formación Java del programa Oracle Next Education ONE.
+Este proyecto se desarrolla con la finalidad de llevar al campo práctico los contenidos estudiados durante el desarrollo del curso de formación Java del programa Oracle Next Education ONE. 
 </p>
+
+<p align="justify">
+El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocionales para Desarrolladores de Software está teniendo problemas para llevar el control de las reservaciones hechas por sus clientes, por eso solicitan nuestra ayuda para desarrollar un sistema de reserva que contenga:</p>
+<p align="justify">1. Sistema de autenticación de usuario para que solo usuarios pertenecientes al hotel consigan acceder al sistema.</p>
+<p align="justify">2. Permitir crear, editar y eliminar una reserva para los clientes.</p>
+<p align="justify">3. Buscar en la base de datos todas las informaciones tanto de los clientes como de las reservas.</p>
+<p align="justify">4. Registrar, editar y eliminar datos de los huéspedes.</p>
+<p align="justify">5. Calcular el valor de la reserva en base a la cantidad de días de la reserva y a una tasa diaria que puede ser asignada por ti y en la moneda local de tu país, por ejemplo, si tenemos una reserva de 3 días y el valor de nuestra diaria son 20$ debemos multiplicar esos 3 días por el valor de la diaria, lo que serían 60$, todo esto deberá ser hecho automáticamente y mostrado al usuario antes de guardar la reserva.</p>
+<p align="justify">6. Base de datos para almacenar todos los datos pedidos anteriormente.</p>
 
 ## Funcionalidades
 - <p align="justify"><strong>Funcionalidad 1: SISTEMA RESERVAS</strong> <br>
-Se encarga de crear una nueva reserva en él se ingresan las fechas de CHECK-IN y CHECK-OUT ya sea eligiéndola del desplegable o manualmente teniendo en cuenta el formato ‘yyyy-mm-dd’, también muestra el tipo de habitación y la forma de pago mediante listas desplegables, el valor a pagar por la reserva se generará de forma automática al seleccionar la fecha de CHECK-OUT la cual debe ser mayor o igual a la fecha de CHECK-IN.</p>
+Se encarga de crear una nueva reserva en él se ingresan las fechas de CHECK-IN y CHECK-OUT ya sea eligiéndola del desplegable o manualmente teniendo en cuenta el formato ‘yyyy-mm-dd’, también muestra el tipo de habitación y la forma de pago mediante listas desplegables, el valor a pagar por la reserva se generará de forma automática al seleccionar la fecha de CHECK-OUT la cual debe ser mayor o igual a la fecha de CHECK-IN.
+</p>
 
 - <p align="justify"><strong>Funcionalidad 2: REGISTRO HUESPED</strong>  <br>
-Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra como Número de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a otro formulario o termina la ejecución del programa mediante el botón salir la reserva creada se eliminará de forma inmediata.</p>
+Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra como Número de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a otro formulario o termina la ejecución del programa mediante el botón salir la reserva creada se eliminará de forma inmediata.
+</p>
 
 - <p align="justify"><strong>Funcionalidad 3: SISTEMA DE BUSQUEDA</strong> <br>
-Aquí se realizan las búsquedas usando como criterio de búsqueda el número de reserva para las reservas y del apellido para los huéspedes, también es posible eliminar un registro de cualquiera de las opciones existentes seleccionando el registro y haciendo clic en el botón eliminar, para editar se debe hacer doble clic en el campo del registro que se desee editar ingresar la nueva información y hacer clic fuera de la celda, pero dentro del registro, luego de esto hacer clic en el botón editar. </p>
+Aquí se realizan las búsquedas usando como criterio de búsqueda el número de reserva para las reservas y del apellido para los huéspedes, también es posible eliminar un registro de cualquiera de las opciones existentes seleccionando el registro y haciendo clic en el botón eliminar, para editar se debe hacer doble clic en el campo del registro que se desee editar ingresar la nueva información y hacer clic fuera de la celda, pero dentro del registro, luego de esto hacer clic en el botón editar.
+</p>
 
 ## Aplicación
 
@@ -88,5 +100,5 @@ Si todo va bien, tu nuevo proyecto se sincronizo correctamente con el repositori
 
 ## Desarrollado por
 
-[<img style ="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/120141795?s=400&u=1224e7aef9eef9f87a1598bd2168761487581ef4&v=4" width=115><br><sub>Roberth de Jesus Rodriguez Castro</sub>](https://github.com/roberthdj)
+[<img style ="border-radius: 20px" src="https://avatars.githubusercontent.com/u/120141795?s=400&u=1224e7aef9eef9f87a1598bd2168761487581ef4&v=4" width=115><br><sub>Roberth de Jesus Rodriguez Castro</sub>](https://github.com/roberthdj)
 
