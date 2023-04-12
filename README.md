@@ -34,10 +34,10 @@
 
 ## Funcionalidades
 - <p align="justify"><strong>Funcionalidad 1: SISTEMA RESERVAS</strong> <br>
-   Se encarga de crear una nueva reserva en el se ingresan las fechas de CHECK-IN y CHECK-OUT ya sea eligiendola del desplegable o manualmente teniendo en        cuenta el formato yyyy-mm-dd, tambien muestra el tipo de habitación y la forma de pago mediantes listas desplegables, el valor a pagar por la reserva se        generará de forma automática al seleccionar la fecha de CHECK-OUT la cual debe ser mayor o igual a la fecha de CHECK-IN</p>
+   Se encarga de crear una nueva reserva en él se ingresan las fechas de CHECK-IN y CHECK-OUT ya sea eligiéndola del desplegable o manualmente teniendo en cuenta el formato ‘yyyy-mm-dd’, también muestra el tipo de habitación y la forma de pago mediante listas desplegables, el valor a pagar por la reserva se generará de forma automática al seleccionar la fecha de CHECK-OUT la cual debe ser mayor o igual a la fecha de CHECK-IN</p>
 
 - <p align="justify"><strong>Funcionalidad 2: REGISTRO HUESPED</strong>  <br>
-    Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra como Número       de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a otro       formulario o termina la ejecución del programa mediante el boton salir la reserva creada se eliminara de forma inmediata </p>
+    Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra como Número de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a otro formulario o termina la ejecución del programa mediante el botón salir la reserva creada se eliminará de forma inmediata</p>
 
 - <p align="justify"><strong>Funcionalidad 3: SISTEMA DE BUSQUEDA</strong> <br> </p>
 
