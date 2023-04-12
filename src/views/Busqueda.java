@@ -535,10 +535,11 @@ public class Busqueda extends JFrame implements ActionListener {
             if (JOptionPane.showConfirmDialog(this, "¿Deseas eliminar la reserva?", "QUESTION", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
                 int idHuesped = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 0);
+                int idReserva = (int) modeloHuesped.getValueAt(tbHuespedes.getSelectedRow(), 6);
                 try {
                     int resultado = this.huespedController.eliminar(idHuesped);
                     if (resultado > 0) {
-                        JOptionPane.showMessageDialog(this, "El huésped número " + idHuesped + " ha sido eliminado, por favor elimine la reserva asociada", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "El huésped número " + idHuesped + " ha sido eliminado, por favor elimine la reserva número " + idReserva, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
                         modeloHuesped.removeRow(tbHuespedes.getSelectedRow());
                     }
                 } catch (Exception e) {
