@@ -1,7 +1,5 @@
 <div align="left">
-
-  <h1>HOTEL ALURA</h1>
-
+<h1><img src="https://github.com/Roberthdj/Hotel-Alura/blob/master/src/imagenes/Ha-100px.png" alt="hotel_alura" width="100" height="100"/>  HOTEL ALURA</h1> 
 </div>
 
 <hr>
@@ -10,7 +8,7 @@
    <img src="http://img.shields.io/static/v1?label=STATUS&message=EN DESARROLLO%20&color=RED&style=for-the-badge" #vitrinedev/>
 </p>
 
-### Tópicos 
+## Tópicos 
 
 - [Descripción del proyecto](#descripción-del-proyecto)
 
@@ -29,17 +27,16 @@
 ## Descripción del proyecto 
 
 <p align="justify">
-Este proyecto se desarrolla con la finalidad de llevar al campo práctico los contenidos estudiados durante el desarrollo del curso de formación Java del programa Oracle Next Education ONE. 
+Este proyecto se desarrolla con la finalidad de llevar al campo práctico los contenidos estudiados durante el desarrollo del curso de formación Java del programa Oracle Next Education ONE.<br><br>
+El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocionales para Desarrolladores de Software está teniendo problemas para llevar el control de las reservaciones hechas por sus clientes, por eso solicitan nuestra ayuda para desarrollar un sistema de reserva que contenga: 
 </p>
 
-<p align="justify">
-El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocionales para Desarrolladores de Software está teniendo problemas para llevar el control de las reservaciones hechas por sus clientes, por eso solicitan nuestra ayuda para desarrollar un sistema de reserva que contenga:</p>
-<p align="justify">1. Sistema de autenticación de usuario para que solo usuarios pertenecientes al hotel consigan acceder al sistema.</p>
-<p align="justify">2. Permitir crear, editar y eliminar una reserva para los clientes.</p>
-<p align="justify">3. Buscar en la base de datos todas las informaciones tanto de los clientes como de las reservas.</p>
-<p align="justify">4. Registrar, editar y eliminar datos de los huéspedes.</p>
-<p align="justify">5. Calcular el valor de la reserva en base a la cantidad de días de la reserva y a una tasa diaria que puede ser asignada por ti y en la moneda local de tu país, por ejemplo, si tenemos una reserva de 3 días y el valor de nuestra diaria son 20$ debemos multiplicar esos 3 días por el valor de la diaria, lo que serían 60$, todo esto deberá ser hecho automáticamente y mostrado al usuario antes de guardar la reserva.</p>
-<p align="justify">6. Base de datos para almacenar todos los datos pedidos anteriormente.</p>
+* Sistema de autenticación de usuario para que solo usuarios pertenecientes al hotel consigan acceder al sistema.
+* Permitir crear, editar y eliminar una reserva para los clientes.
+* Buscar en la base de datos todas las informaciones tanto de los clientes como de las reservas.
+* Registrar, editar y eliminar datos de los huéspedes.
+* Calcular el valor de la reserva en base a la cantidad de días de la reserva y a una tasa diaria que puede ser asignada por ti y en la moneda local de tu país, por ejemplo, si tenemos una reserva de 3 días y el valor de nuestra diaria son 20$ debemos multiplicar esos 3 días por el valor de la diaria, lo que serían 60$, todo esto deberá ser hecho automáticamente y mostrado al usuario antes de guardar la reserva.
+* Base de datos para almacenar todos los datos pedidos anteriormente.
 
 ## Funcionalidades
 - <p align="justify"><strong>Funcionalidad 1: SISTEMA RESERVAS</strong> <br>
