@@ -33,11 +33,13 @@
 </p>
 
 ## Funcionalidades
-- <p align="justify"><strong>Funcionalidad 1:</strong> </p>
+- <p align="justify"><strong>Funcionalidad 1: SISTEMA RESERVAS</strong> <br>
+   Se encarga de resgistrar las fechas de CHECK-IN y CHECK-OUT ofreciendo al usuario la alernativa de escojer del calendario que se despliega o ingresarla        manualmente teniendo en cuenta el formato yyyy-mm-dd, tambien muestra el tipo de habitación y la forma de pago mediantes listas desplegables, el valor a        pagar por la reserva se generará de forma automática al seleccionar la fecha de CHECK-OUT</p>
 
-- <p align="justify"><strong>Funcionalidad 2:</strong> </p>
+- <p align="justify"><strong>Funcionalidad 2: REGISTRO HUESPED</strong>  <br>
+    Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra como Número       de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a otro       formulario o termina la ejecución del programa mediante el boton salir la reserva creada se eliminara de forma inmediata </p>
 
-- <p align="justify"><strong>Funcionalidad 3:</strong> </p>
+- <p align="justify"><strong>Funcionalidad 3: SISTEMA DE BUSQUEDA</strong> <br> </p>
 
 ## Aplicación
 
