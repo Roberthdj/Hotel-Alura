@@ -111,7 +111,7 @@ Si todo va bien, tu nuevo proyecto se sincronizo correctamente con el repositori
       Contraseña: admin
 
       Usuario:    usuario1
-      Contraseña: usuario1  
+      Contraseña: 123456  
 
 ## Desarrollado por
 
