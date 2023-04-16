@@ -39,17 +39,22 @@ El Hotel Alura conocido por su espectaculares instalaciones y paquetes promocion
 * Base de datos para almacenar todos los datos pedidos anteriormente.
 
 ## Funcionalidades
-- <p align="justify"><strong>Funcionalidad 1: SISTEMA RESERVAS</strong> <br>
+- <p align="justify"><strong>Funcionalidad 1: LOGIN</strong> <br>
+   <p align="justify">Es el primer formulario con el que te encuentras al iniciar la aplicación, en el debes engresar un usuario y contraseña validos y te enviara al      menu de usuario donde encontraras las opciones para ingrsar al sistema de reservas o al sistema de busquedas.
+   </p>
+</p>
+
+- <p align="justify"><strong>Funcionalidad 2: SISTEMA RESERVAS</strong> <br>
    <p align="justify">Se encarga de crear una nueva reserva en él se ingresan las fechas de CHECK-IN y CHECK-OUT ya sea eligiéndola del desplegable o manualmente          teniendo en cuenta el formato ‘yyyy-mm-dd’, también muestra el tipo de habitación y la forma de pago mediante listas desplegables, el valor a pagar por la reserva      se generará de forma automática al seleccionar la fecha de CHECK-OUT la cual debe ser mayor o igual a la fecha de CHECK-IN.
    </p>
 </p>
 
-- <p align="justify"><strong>Funcionalidad 2: REGISTRO HUESPED</strong> <br>
+- <p align="justify"><strong>Funcionalidad 3: REGISTRO HUESPED</strong> <br>
    <p align="justify">Al generarse una nueva reserva en esta se genera un identificador de forma automática, el cual es trasferido al REGISTRO HUESPED y se muestra        como Número de reserva, el usuario del sistema debe completar todos los campos restantes y confirmar la creación de la reserva, si se sale de REGISTRO HUESPED a        otro formulario o termina la ejecución del programa mediante el botón salir la reserva creada se eliminará de forma inmediata.
    </p>
 </p>
 
-- <p align="justify"><strong>Funcionalidad 3: SISTEMA DE BUSQUEDA</strong> <br>
+- <p align="justify"><strong>Funcionalidad 4: SISTEMA DE BUSQUEDA</strong> <br>
       <p align="justify">Aquí se realizan las búsquedas usando como criterio de búsqueda el número de reserva para las reservas y del apellido para los huéspedes,           también es posible eliminar un registro de cualquiera de las opciones existentes seleccionando el registro y haciendo clic en el botón eliminar, para editar se         debe hacer doble clic en el campo del registro que se desee editar ingresar la nueva información y hacer clic fuera de la celda, pero dentro del registro,             luego de esto hacer clic en el botón editar.
       </p>
 </p>
@@ -97,6 +102,16 @@ Para correr `Conversor Alura`en tu máquina local:
 - Finalmente ejecuta la linea: git pull origin master
 
 Si todo va bien, tu nuevo proyecto se sincronizo correctamente con el repositorio!
+
+### 
+      Utilizando Mysql se debe crear la base de datos, solo se debe ejecutar el script hotel.sql que se encuentra en sqlDatabase, 
+      para ingresar a la aplicación se utiliza uno de los dos usuarios creados con el script.
+      
+      Usuario:    admin
+      Contraseña: admin
+
+      Usuario:    usuario1
+      Contraseña: usuario1  
 
 ## Desarrollado por
 
