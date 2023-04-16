@@ -1,5 +1,6 @@
 package views;
 
+import controller.UsuarioController;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,6 +30,7 @@ public class Login extends JFrame {
     private JPasswordField txtContrasena;
     int xMouse, yMouse;
     private JLabel labelExit;
+    private UsuarioController usuarioController;
 
     /**
      * Launch the application.
@@ -53,8 +55,8 @@ public class Login extends JFrame {
         crearFormulario();
     }
 
-    private void crearFormulario(){
-                setResizable(false);
+    private void crearFormulario() {
+        setResizable(false);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 788, 527);
@@ -240,14 +242,18 @@ public class Login extends JFrame {
         panel.add(header);
         header.setLayout(null);
     }
-    
+
     private void Login() {
-        String Usuario = "admin";
-        String Contraseña = "admin";
 
-        String contrase = new String(txtContrasena.getPassword());
+        String usuario = txtUsuario.getText();
+        String contrasena = new String(txtContrasena.getPassword());
+        
+        this.usuarioController = new UsuarioController();        
+        boolean estadoUsuario = this.usuarioController.buscarUsuario(usuario, contrasena);
+        
+        System.out.println("USUARIO: " + usuario + "\nCONTRASEÑA: " + contrasena + "\nESTADO: " + estadoUsuario );
 
-        if (txtUsuario.getText().equals(Usuario) && contrase.equals(Contraseña)) {
+        if (estadoUsuario) {
             MenuUsuario menu = new MenuUsuario();
             menu.setVisible(true);
             dispose();
