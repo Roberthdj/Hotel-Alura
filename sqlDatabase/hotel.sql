@@ -31,6 +31,6 @@ PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 INSERT INTO usuarios(usuario, contrasena) VALUES ('admin', 'admin');
-INSERT INTO usuarios(usuario, contrasena) VALUES ('usuario1', 'usuario1');
+INSERT INTO usuarios(usuario, contrasena) VALUES ('usuario1', '123456');
 
 
